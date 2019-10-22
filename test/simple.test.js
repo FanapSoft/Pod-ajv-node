@@ -103,6 +103,44 @@ describe('shamsiDateTime', function () {
   });
 });
 
+describe('shamsiDateTimeMan', function () {
+  it('wrong (with whitespace)', function (done) {
+    let schema = { shamsiDateTimeMan: [] };
+    let data = '  13980502  22:00:30';
+    let result = podAjv.validate(schema, data);
+    expect(result).to.equal(false);
+    done();
+  });
+  it('wrong (number)', function (done) {
+    let schema = { shamsiDateTimeMan: [] };
+    let data = 13980502;
+    let result = podAjv.validate(schema, data);
+    expect(result).to.equal(false);
+    done();
+  });
+  it('wrong (with dash)', function (done) {
+    let schema = { shamsiDateTimeMan: [] };
+    let data = '1398-05-02 22:11:02';
+    let result = podAjv.validate(schema, data);
+    expect(result).to.equal(false);
+    done();
+  });
+  it('wrong (with no time)', function (done) {
+    let schema = { shamsiDateTimeMan: [] };
+    let data = '1398/02/05';
+    let result = podAjv.validate(schema, data);
+    expect(result).to.equal(false);
+    done();
+  });
+  it('correct form', function (done) {
+    let schema = { shamsiDateTimeMan: [] };
+    let data = '1398/02/05 12:02:14';
+    let result = podAjv.validate(schema, data);
+    expect(result).to.equal(true);
+    done();
+  });
+});
+
 describe('integerString', function () {
   it('wrong (with whitespace)', function (done) {
     let schema = { integerString: [] };
@@ -380,7 +418,7 @@ describe('uri', function () {
   });
 });
 
-describe.only('nationalCode', function () {
+describe('nationalCode', function () {
   it('wrong', function (done) {
     let schema = { nationalCode: [] };
     let data = '2';
@@ -406,6 +444,102 @@ describe.only('nationalCode', function () {
   it('correct', function (done) {
     let schema = { nationalCode: [] };
     let data = '0945700113';
+    let result = podAjv.validate(schema, data);
+    expect(result).to.equal(true);
+    done();
+  });
+});
+
+describe('shamsiDateTimeToMin', function () {
+  it('wrong', function (done) {
+    let schema = { shamsiDateTimeToMin: [] };
+    let data = '2';
+    let result = podAjv.validate(schema, data);
+    // console.log(podAjv.errors);
+    expect(result).to.equal(false);
+    done();
+  });
+  it('wrong', function (done) {
+    let schema = { shamsiDateTimeToMin: [] };
+    let data = 1111111111;
+    let result = podAjv.validate(schema, data);
+    expect(result).to.equal(false);
+    done();
+  });
+  it('wrong', function (done) {
+    let schema = { shamsiDateTimeToMin: [] };
+    let data = '12547ee852';
+    let result = podAjv.validate(schema, data);
+    expect(result).to.equal(false);
+    done();
+  });
+  it('correct', function (done) {
+    let schema = { shamsiDateTimeToMin: [] };
+    let data = '1398/02/05 12:02';
+    let result = podAjv.validate(schema, data);
+    expect(result).to.equal(true);
+    done();
+  });
+});
+
+describe('billId', function () {
+  it('wrong', function (done) {
+    let schema = { billId: [] };
+    let data = '2';
+    let result = podAjv.validate(schema, data);
+    // console.log(podAjv.errors);
+    expect(result).to.equal(false);
+    done();
+  });
+  it('wrong', function (done) {
+    let schema = { billId: [] };
+    let data = 1111111111;
+    let result = podAjv.validate(schema, data);
+    expect(result).to.equal(false);
+    done();
+  });
+  it('wrong', function (done) {
+    let schema = { billId: [] };
+    let data = '12547ee852';
+    let result = podAjv.validate(schema, data);
+    expect(result).to.equal(false);
+    done();
+  });
+  it('correct', function (done) {
+    let schema = { billId: [] };
+    let data = '4972808930150';
+    let result = podAjv.validate(schema, data);
+    expect(result).to.equal(true);
+    done();
+  });
+});
+
+describe.only('paymentId', function () {
+  it('wrong', function (done) {
+    let schema = { paymentId: [] };
+    let data = '2';
+    let result = podAjv.validate(schema, data);
+    // console.log(podAjv.errors);
+    expect(result).to.equal(false);
+    done();
+  });
+  it('wrong', function (done) {
+    let schema = { paymentId: [] };
+    let data = 1111111111;
+    let result = podAjv.validate(schema, data);
+    expect(result).to.equal(false);
+    done();
+  });
+  it('wrong', function (done) {
+    let schema = { paymentId: [] };
+    let data = '12547ee852';
+    let result = podAjv.validate(schema, data);
+    expect(result).to.equal(false);
+    done();
+  });
+  it('correct', function (done) {
+    let schema = { paymentId: [] };
+    let data = '19586740';
     let result = podAjv.validate(schema, data);
     expect(result).to.equal(true);
     done();

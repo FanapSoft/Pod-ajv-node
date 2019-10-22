@@ -1,6 +1,6 @@
 {
   "name": "pod-ajv",
-  "version": "1.0.0",
+  "version": "1.2.0",
   "description": "This module adds custom keywords to ajv",
   "main": "index.js",
   "scripts": {
